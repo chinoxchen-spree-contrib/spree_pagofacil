@@ -50,8 +50,8 @@ module Spree
       signature = OpenSSL::HMAC.hexdigest('sha256', payment_method.preferences[:pagofacil_secret_token], create_signature)
 
 
-      unless payment.completed? || payment.failed? || signature != x_signature
-        case x_message
+      unless payment.completed? || signature != x_signature
+        case x_result
         when 'completed'
           payment.complete!
           order = payment.order
