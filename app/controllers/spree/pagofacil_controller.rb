@@ -34,6 +34,9 @@ module Spree
       x_message = params['x_message']
       x_signature = params['x_signature']
 
+      payment = Spree::Payment.find_by!(number: x_reference)
+      payment_method = payment.payment_method
+
       create_signature = 'x_account_id'+x_account_id+
                          'x_amount'+x_amount+
                          'x_currency'+x_currency+
@@ -46,7 +49,6 @@ module Spree
 
       signature = OpenSSL::HMAC.hexdigest('sha256', payment_method.preferences[:pagofacil_secret_token], create_signature)
 
-      payment = Spree::Payment.find_by(number: x_reference)
 
       unless payment.completed? || payment.failed? || signature != x_signature
         case x_message
