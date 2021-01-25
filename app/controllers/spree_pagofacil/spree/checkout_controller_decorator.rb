@@ -62,7 +62,7 @@ module SpreePagofacil::Spree
             "x_shop_country": 'CL',
             "x_url_callback": pagofacil_notify_url,
             "x_url_cancel": pagofacil_cancel_url(payment_number),
-            "x_url_complete": pagofacil_success_url(payment_number)
+            "x_url_complete": pagofacil_successg_url(payment_number)
           }
 
           signature = OpenSSL::HMAC.hexdigest('sha256', payment_method.preferences[:pagofacil_secret_token], data.sort.join)
@@ -96,7 +96,7 @@ module SpreePagofacil::Spree
                             "x_currency": 'CLP',
                             "x_reference": payment_number,
                             "x_customer_email": @order.email,
-                            "x_url_complete": pagofacil_success_url(payment_number),
+                            "x_url_complete": pagofacil_successg_url(payment_number),
                             "x_url_cancel": pagofacil_cancel_url(payment_number),
                             "x_url_callback": pagofacil_notify_url,
                             "x_shop_country": 'CL',
