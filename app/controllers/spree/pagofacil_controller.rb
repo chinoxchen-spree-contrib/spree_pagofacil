@@ -23,16 +23,16 @@ module Spree
     end
 
     def notify
-      x_account_id = params[:x_account_id]
-      x_amount = params[:x_amount]
-      x_currency = params[:x_currency]
-      x_gateway_reference = params[:x_gateway_reference]
-      x_reference = params[:x_reference]
-      x_result = params[:x_result]
-      x_test = params[:x_test]
-      x_timestamp = params[:x_timestamp]
-      x_message = params[:x_message]
-      x_signature = params[:x_signature]
+      x_account_id = params['x_account_id']
+      x_amount = params['x_amount']
+      x_currency = params['x_currency']
+      x_gateway_reference = params['x_gateway_reference']
+      x_reference = params['x_reference']
+      x_result = params['x_result']
+      x_test = params['x_test']
+      x_timestamp = params['x_timestamp']
+      x_message = params['x_message']
+      x_signature = params['x_signature']
 
       create_signature = 'x_account_id'+x_account_id+
                          'x_amount'+x_amount+
