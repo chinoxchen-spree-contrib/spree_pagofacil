@@ -7,7 +7,9 @@ module Spree
       @payment = Spree::Payment.where(number: params[:payment]).last
       return unless @payment.order.completed?
 
+      session[:order_id] = nil
       @current_order = nil
+
       unless PagofacilNotification.find_by(order_id: @payment.order_id, payment_id: @payment.id)
         flash.notice = Spree.t(:order_processed_successfully)
         flash['order_completed'] = true
@@ -64,7 +66,7 @@ module Spree
       head :unprocessable_entity
     end
 
-    def completion_route(order, custom_params = nil) spree.order_path(order, custom_params)
+    def completion_route(order, custom_params = nil) spree.order_path(id: order.number)
     end
   end
 end
