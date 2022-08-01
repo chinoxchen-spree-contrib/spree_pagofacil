@@ -58,7 +58,11 @@ module Spree
           payment.complete!
           order = payment.order
           order.skip_stock_validation = true
-          payment.order.next!
+          ix = 0
+          while !order.completed? && ix < 5
+            order.next!
+            ix += 1
+          end
         end
       end
       head :ok
